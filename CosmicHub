@@ -1,4 +1,32 @@
 -- Cosmic Hub FTAP
+
+-- Whitelist Setup
+local WhitelistedUsers = {
+    "TCUTCU_LLBDDLLZYXZY", 
+    "Player2",
+    "Player3"
+}
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Function to check if the player is whitelisted
+local function isWhitelisted(username)
+    for _, whitelistedName in ipairs(WhitelistedUsers) do
+        if username == whitelistedName then
+            return true
+        end
+    end
+    return false
+end
+
+-- Check if the player is allowed to use the script
+if not isWhitelisted(LocalPlayer.Name) then
+    -- If not whitelisted, display a notification and stop the script
+    game.Players.LocalPlayer:Kick("You are not whitelisted to use this script.")
+    return
+end
+
 Players = game:GetService("Players")
 RunService = game:GetService("RunService")
 local HttpService = game:GetService("HttpService")
